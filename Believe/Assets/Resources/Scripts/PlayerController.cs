@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
     public float playerSpeed;
+    GameObject flashLight;
+    
 	// Use this for initialization
 	void Start () {
 		
@@ -16,9 +18,8 @@ public class PlayerController : MonoBehaviour {
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mouseWorldPos.y = gameObject.transform.position.y;
         Vector3 lookDir = mouseWorldPos - gameObject.transform.position;
-        Debug.Log("forward: " + gameObject.transform.forward);
-        Debug.Log("lookDir: " + lookDir);
         if (lookDir.magnitude>0.5) gameObject.transform.forward = lookDir.normalized;
         //gameObject.transform.LookAt(mouseWorldPos);
+
     }
 }
