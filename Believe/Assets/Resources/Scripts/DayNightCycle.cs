@@ -6,7 +6,7 @@ public class DayNightCycle : MonoBehaviour {
     private float speed;
 	// Use this for initialization
 	void Start () {
-        speed = 0.8f;
+        speed = 3f;
 	}
 	
 	// Update is called once per frame
