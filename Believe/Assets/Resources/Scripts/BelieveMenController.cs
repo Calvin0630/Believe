@@ -9,6 +9,9 @@ public class BelieveMenController : MonoBehaviour {
     private Vector2 randomVec;
     private Vector3 randomXZ;
     public GameObject player;
+    public GameObject bullet;
+    private int reloadTime;
+    private int reloadDone;
     public float idleSpeed;
     public float walkSpeed;
     public float detectionRange;
@@ -16,6 +19,8 @@ public class BelieveMenController : MonoBehaviour {
 	void Start () {
         canMove = false;
         unitCounter = 1;
+        reloadTime = 50;
+        reloadDone = 0;
     }
 	
 	// Update is called once per frame
@@ -24,7 +29,21 @@ public class BelieveMenController : MonoBehaviour {
         {
             if ((player.transform.position - this.transform.position).sqrMagnitude < detectionRange * detectionRange)
             {
+                Vector3 believeGuypos = this.transform.position;
+                Vector3 believeGuyDirection = player.transform.position - this.transform.position;
+                Quaternion believeGuyRotation = this.transform.rotation;
                 transform.position = Vector3.MoveTowards(transform.position, player.transform.position, walkSpeed * Time.deltaTime);
+                
+                float spawnDistance = 0.5f;
+                if (reloadDone <= 0)
+                {
+                    Vector3 spawnBullet = believeGuypos + (spawnDistance * believeGuyDirection);
+                    GameObject oneBullet = Instantiate(bullet, spawnBullet, believeGuyRotation);
+                    oneBullet.GetComponent<Rigidbody>().AddForce(believeGuyDirection * 0.01f);
+                    reloadDone = reloadTime;
+                }
+                if (reloadDone > 0)
+                    reloadDone--;
             }
             else
             {

@@ -19,6 +19,6 @@ public class LightController : MonoBehaviour {
             batteryLevel -= (efficiency * Time.deltaTime);
             flashLight.intensity = batteryLevel / 100;
         }
-        print(batteryLevel);
+       
 	}
 }
