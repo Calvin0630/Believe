@@ -52,17 +52,18 @@ public class FlashLightController : MonoBehaviour {
                 //set the color of the UI light slider to grey
                 sliderFill.color = sliderInactiveColor;
                 flashLightEnabled = false;
+                flashLight.enabled = false;
             }
             else if (!flashLightEnabled) {
                 sliderFill.color = sliderActiveColor;
                 flashLightEnabled = true;
+                flashLight.enabled = true;
             }
         }
     }
 
     //adds 0.2 to the charge.
     public void ConsumeBattery() {
-        Debug.Log("consume battery");
         if (batteryLevel + 0.2f > 1) batteryLevel = 1;
         else batteryLevel += 0.2f;
     }
